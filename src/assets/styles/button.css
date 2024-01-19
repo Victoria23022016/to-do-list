@@ -1,0 +1,30 @@
+.button {
+  box-sizing: border-box;
+  border-radius: 0.8rem;
+  border: none;
+  font-family: var(--font);
+  font-size: 1.8rem;
+  letter-spacing: 0rem;
+  text-align: center;
+  width: 100%;
+}
+
+.button_auth {
+  font-weight: 400;
+  line-height: 2.2rem;
+  background-color: var(--medium-green);
+  height: 6.4rem;
+  margin-top: 2.6rem;
+}
+
+.button_primary {
+  font-weight: 600;
+  line-height: 2.2rem;
+  background-color: var(--medium-green);
+}
+
+.button_logout {
+  font-weight: 600;
+  line-height: 2.2rem;
+  background-color: var(--orange);
+}

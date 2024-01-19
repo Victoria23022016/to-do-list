@@ -1,1 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/*@import "./assets/styles/normalize.css";*/
+@import "./assets/styles/fonts.css";
+@import "./assets/styles/button.css";
+@import "./assets/styles/container.css";
+@import "./assets/styles/form.css";
+@import "./assets/styles/page.css";
+@import "./assets/styles/posts.css";
+@import "./assets/styles/sidebar.css";
+
+:root {
+  font-size: 10px;
+  --orange: #ff5e48f2;
+  --light-green: #ecfefb;
+  --medium-green: #3feecf;
+  --black: #000000;
+  --grey: #e5e5e5;
+  --medium-grey: #848484;
+  --white: #ffffff;
+  --font: Inter;
+}
