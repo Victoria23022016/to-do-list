@@ -11,7 +11,6 @@ export class AuthService {
   loginURL = 'https://dummyjson.com/auth/login';
   currentUserURL = 'https://dummyjson.com/auth/me';
   loginHeaders = { 'Content-Type': 'application/json' };
-  user: User;
 
   constructor(
     private readonly _http: HttpClient,
@@ -20,16 +19,15 @@ export class AuthService {
 
   login(formData: AuthData) {
     this.getToken(formData).subscribe((response) => {
-      this.user = response;
-      this._addTokenToLocalStorage(this.user);
-      this._store$.dispatch(new LoginCreateAction(this.user));
+      this._addTokenToLocalStorage(response);
+      this._store$.dispatch(new LoginCreateAction(response));
     });
   }
 
   auth(): void {
     this._getUserDataByToken().subscribe((responce) => {
-      this.user = responce;
-      this._store$.dispatch(new LoginCreateAction(this.user));
+      //add unsubscribe
+      this._store$.dispatch(new LoginCreateAction(responce));
     });
   }
 

@@ -1,6 +1,9 @@
 <app-todo-profile-ui></app-todo-profile-ui>
 <app-todo-form-ui></app-todo-form-ui>
 <app-todo-list-ui></app-todo-list-ui>
-<div *ngFor="let t of test | async">
-  <p>{{ t.todo }}</p>
+<span>TTT</span>
+<div *ngIf="todoList$ | async">
+  <div *ngFor="let t of todoList$ | async">
+    <p>{{ t.todo }}</p>
+  </div>
 </div>

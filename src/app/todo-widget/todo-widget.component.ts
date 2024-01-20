@@ -11,8 +11,7 @@ import { todoSelector } from '../store/todo/todo.selectors';
   templateUrl: './todo-widget.component.html',
 })
 export class TodoWidgetComponent {
-  todoList: Todo[];
-  test: Observable<Todo[]>; //убрать
+  todoList$: Observable<Todo[]>;
 
   constructor(
     private readonly _todoService: TodoService,
@@ -20,6 +19,6 @@ export class TodoWidgetComponent {
   ) {}
 
   ngOnInit() {
-    // this._todoService.loadTodoList().subscribe(resp => resp.todos = this.todoList)
+    this.todoList$ = this._todoService.getTodoListFromServer();
   }
 }
