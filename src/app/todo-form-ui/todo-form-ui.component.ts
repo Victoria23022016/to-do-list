@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TodoValidators } from './todo-form.validators';
+import { TodoValidators } from '../validators/todo.validators';
 
 @Component({
   selector: 'app-todo-form-ui',
@@ -20,7 +20,7 @@ export class TodoFormUiComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      todo: new FormControl('', [Validators.required, TodoValidators.minValue]), //сделать доп.валидатор
+      todo: new FormControl('', [Validators.required, TodoValidators.minValue]),
     });
   }
 

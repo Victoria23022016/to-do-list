@@ -18,6 +18,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .todo-card__number {
@@ -32,6 +33,7 @@
   font-weight: 400;
   line-height: 1.9rem;
   letter-spacing: 0em;
+  cursor: pointer;
 }
 
 .todo-card__checks {
@@ -50,4 +52,10 @@
 .todo-card__icon {
   fill: var(--black);
   cursor: pointer;
+}
+
+.todo-card__hidden {
+  position: absolute;
+  left: 1.38rem;
+  top: 1.2rem;
 }

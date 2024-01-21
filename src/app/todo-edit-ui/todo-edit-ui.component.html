@@ -1,1 +1,9 @@
-<p>todo-edit-ui works!</p>
+<form>
+  <input
+    class="form__input todo-card__text"
+    type="text"
+    name="edit"
+    [(ngModel)]="text"
+    (keydown.enter)="onEdit()"
+  />
+</form>
