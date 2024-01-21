@@ -1,0 +1,21 @@
+<div class="page">
+  <div class="container">
+    <div class="container__layout">
+      <aside class="sidebar sidebar__outer">
+        <div class="sidebar__inner">
+          <app-todo-profile-ui [user]="user$ | async"></app-todo-profile-ui>
+          <app-todo-form-ui (createTodo)="onCreate($event)"></app-todo-form-ui>
+          <app-todo-tools-ui></app-todo-tools-ui>
+          <app-todo-logout-ui (logout)="logoutUser()"></app-todo-logout-ui>
+        </div>
+      </aside>
+      <main class="todos todos__outer">
+        <app-todo-list-ui
+          [todoList]="todoList$ | async"
+          (deleteTodo)="onDeleteTodo($event)"
+          (checkTodo)="onCheckTodo($event)"
+        ></app-todo-list-ui>
+      </main>
+    </div>
+  </div>
+</div>

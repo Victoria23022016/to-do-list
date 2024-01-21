@@ -1,3 +1,9 @@
-.container_auth {
+.container {
   margin: auto;
+}
+
+.container__layout {
+  height: 100%;
+  display: flex;
+  gap: 7rem;
 }

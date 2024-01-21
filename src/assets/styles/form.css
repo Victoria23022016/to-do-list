@@ -11,6 +11,11 @@
   font-family: var(--font);
 }
 
+.form_profile {
+  padding: 0;
+  margin-top: 3.8rem;
+}
+
 .form__inner {
   width: 42.7rem;
   height: 45rem;
@@ -55,6 +60,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.form__input-wrapper_profile {
+  box-sizing: border-box;
+  height: 5.4rem;
+  width: 26.7rem;
+  border-radius: 1.2rem;
+  border: 0.1rem solid var(--medium-grey);
+  padding: 1.6rem;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
 }
 
 .form__input {

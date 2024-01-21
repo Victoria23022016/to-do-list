@@ -1,0 +1,17 @@
+<h1 class="sidebar__title">ToDo App</h1>
+<h2 class="sidebar__text">User</h2>
+<div class="sidebar__profile">
+  <div class="sidebar__avatar">
+    <img
+      class="sidebar__img"
+      ngSrc="{{ user.image }}"
+      fill="true"
+      priority="true"
+    />
+  </div>
+
+  <div class="sidebar__info">
+    <span class="sidebar__text_small">{{ user.firstName }}</span>
+    <span class="sidebar__text_small">{{ user.lastName }}</span>
+  </div>
+</div>
