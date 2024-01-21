@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthData, User } from '../models/models';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { LoginCreateAction } from '../store/login/login.actions';
-import { loginSelector } from '../store/login/login.selectors';
+import { AuthCreateAction } from '../store/auth/auth.actions';
+import { loginSelector } from '../store/auth/auth.selectors';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -14,24 +15,28 @@ export class AuthService {
 
   constructor(
     private readonly _http: HttpClient,
-    private readonly _store$: Store<User>
-  ) {}
-
-  login(formData: AuthData) {
-    this.getToken(formData).subscribe((response) => {
-      this._addTokenToLocalStorage(response);
-      this._store$.dispatch(new LoginCreateAction(response));
-    });
+    private readonly _store$: Store<User>,
+    private readonly _destroyRef: DestroyRef
+  ) {
+    if (this.checkTokenInLocalStorage()) {
+      this.auth().pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
+    }
   }
 
-  auth(): void {
-    this._getUserDataByToken().subscribe((responce) => {
-      //add unsubscribe
-      this._store$.dispatch(new LoginCreateAction(responce));
-    });
+  login(formData: AuthData): Observable<User> {
+    return this.getUserFromServer(formData).pipe(
+      tap((user) => this._addTokenToLocalStorage(user.token)),
+      tap((user) => this._store$.dispatch(new AuthCreateAction(user)))
+    );
   }
 
-  getToken(formData: AuthData): Observable<User> {
+  auth(): Observable<User> {
+    return this._getUserDataByToken().pipe(
+      tap((user) => this._store$.dispatch(new AuthCreateAction(user)))
+    );
+  }
+
+  getUserFromServer(formData: AuthData): Observable<User> {
     return this._http.post<User>(this.loginURL, formData, {
       headers: new HttpHeaders(this.loginHeaders),
     });
@@ -45,8 +50,16 @@ export class AuthService {
     return window.localStorage['bearerToken'] ? true : false;
   }
 
-  private _addTokenToLocalStorage(user: User): void {
-    window.localStorage['bearerToken'] = user.token;
+  checkUserInStorage(): boolean {
+    let check: boolean;
+    this._store$
+      .pipe(select(loginSelector))
+      .subscribe((responce) => (check = !!responce.id));
+    return check;
+  }
+
+  private _addTokenToLocalStorage(token: string): void {
+    window.localStorage['bearerToken'] = token;
   }
 
   private _getUserDataByToken(): Observable<User> {

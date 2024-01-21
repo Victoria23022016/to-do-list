@@ -1,0 +1,97 @@
+.sidebar {
+  background-color: var(--light-green);
+  font-family: var(--font);
+  color: var(--black);
+}
+.sidebar__outer {
+  width: 34rem;
+}
+
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  margin-top: 5.2rem;
+}
+
+.sidebar__title {
+  font-size: 4.8rem;
+  font-weight: 800;
+  line-height: 5.8rem;
+  letter-spacing: 0em;
+  margin: 0;
+}
+
+.sidebar__text {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 2.9rem;
+  letter-spacing: 0rem;
+  text-align: center;
+}
+
+.sidebar__text_small {
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 2.2rem;
+  letter-spacing: 0em;
+}
+
+.sidebar__profile {
+  width: 26.7rem;
+  background-color: var(--white);
+  height: 15.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar__avatar {
+  width: 10.2rem;
+  height: 10.2rem;
+  position: relative;
+}
+
+.sidebar__img {
+  object-fit: cover;
+  border-radius: 50%;
+  outline: none;
+}
+
+.sidebar__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__tools-layout {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: row;
+  gap: 3.8rem;
+}
+.sidebar__tools {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.sidebar__buttons-layout {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+}
+
+.sidebar__logout {
+  margin-top: 4rem;
+  width: 26.7rem;
+}

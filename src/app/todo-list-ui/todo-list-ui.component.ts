@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Todo } from '../models/models';
 
 @Component({
   selector: 'app-todo-list-ui',

@@ -12,6 +12,7 @@ export const TodoReducer = (state = initialState, action: TodoActions) => {
         ...state,
         { id: action.payload.id, todo: action.payload.todo, completed: false },
       ];
+
     default:
       return state;
   }

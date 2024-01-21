@@ -15,8 +15,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { LOGIN_REDUCER_NODE, loginReducer } from './store/login/login.reducer';
+import { AUTH_REDUCER_NODE, authReducer } from './store/auth/auth.reducer';
 import { TodoReducer, TODO_REDUCER_NODE } from './store/todo/todo.reducer';
+import { TodoGuard } from './guards/todo.guard';
+import { TodoToolsUiComponent } from './todo-tools-ui/todo-tools-ui.component';
+import { NgOptimizedImage } from '@angular/common';
+import { TodoLogoutUiComponent } from './todo-logout-ui/todo-logout-ui.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,8 @@ import { TodoReducer, TODO_REDUCER_NODE } from './store/todo/todo.reducer';
     TodoItemUiComponent,
     TodoEditUiComponent,
     TodoProfileUiComponent,
+    TodoToolsUiComponent,
+    TodoLogoutUiComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,12 +43,16 @@ import { TodoReducer, TODO_REDUCER_NODE } from './store/todo/todo.reducer';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ LOGIN_REDUCER_NODE: loginReducer }),
-    StoreModule.forRoot({ TODO_REDUCER_NODE: TodoReducer }),
+    StoreModule.forRoot({
+      AUTH_REDUCER_NODE: authReducer,
+      TODO_REDUCER_NODE: TodoReducer,
+    }),
+
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([]),
+    NgOptimizedImage,
   ],
-  providers: [],
+  providers: [TodoGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

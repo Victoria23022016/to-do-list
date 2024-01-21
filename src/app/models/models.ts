@@ -3,6 +3,10 @@ export interface AuthData {
   password: string;
 }
 
+export interface UserState {
+  user: User;
+}
+
 export interface User {
   id: number;
   username: string;

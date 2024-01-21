@@ -23,8 +23,36 @@
   background-color: var(--medium-green);
 }
 
+.button_secondary {
+  font-weight: 600;
+  line-height: 2.2rem;
+  background-color: var(--grey);
+}
+
 .button_logout {
   font-weight: 600;
   line-height: 2.2rem;
   background-color: var(--orange);
+}
+
+.button__inner {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 5.6rem;
+}
+
+.button__inner_small {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3.2rem;
+  width: 3.4rem;
+}
+
+.button__icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: var(--black);
 }
