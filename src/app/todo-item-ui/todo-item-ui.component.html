@@ -1,10 +1,26 @@
 <span class="todo-card__number">{{ todo.id + "." }}</span>
 <div class="todo-card__body">
-  <div class="todo-card__text">{{ todo.todo }}</div>
-  <div class="todo-card__checks">
+  <div
+    class="todo-card__text"
+    [ngStyle]="{ display: hiddenInput ? 'flex' : 'none' }"
+  >
+    {{ todo.todo }}
+  </div>
+  <app-todo-edit-ui
+    class="todo-card__hidden"
+    [hiddenInput]="hiddenInput"
+    [ngStyle]="{ display: hiddenInput ? 'none' : 'flex' }"
+    [todo]="todo"
+    (editTodo)="onEdit($event, todo.id)"
+  ></app-todo-edit-ui>
+  <div
+    class="todo-card__checks"
+    [ngStyle]="{ display: hiddenInput ? 'flex' : 'none' }"
+  >
     <div class="todo-card__icon-wrapper">
       <svg
         class="todo-card__icon"
+        (click)="showInput()"
         width="18"
         height="18"
         viewBox="0 0 18 18"
@@ -49,7 +65,3 @@
     </div>
   </div>
 </div>
-
-<!--
-<app-todo-edit-ui></app-todo-edit-ui>
--->

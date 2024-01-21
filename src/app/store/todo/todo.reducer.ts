@@ -26,16 +26,17 @@ export const TodoReducer = (state = initialState, action: TodoActions) => {
             }
           : todo
       );
+
+    case TodoActionsType.edit:
+      return state.map((todo) =>
+        todo.id === action.payload.id
+          ? {
+              ...todo,
+              todo: action.payload.text,
+            }
+          : todo
+      );
     default:
       return state;
   }
 };
-
-// case todoActionsType.toggle:
-//   return {
-//     ...state,
-//     todoList: state.todoList.map(todo => todo.id === action.payload.id ? {
-//       ...todo,
-//       completed: !todo.completed
-//     } : todo)
-//   };

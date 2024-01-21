@@ -54,6 +54,7 @@ export class AuthService {
     let check: boolean;
     this._store$
       .pipe(select(loginSelector))
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((responce) => (check = !!responce.id));
     return check;
   }

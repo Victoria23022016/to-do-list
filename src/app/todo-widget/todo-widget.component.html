@@ -5,7 +5,10 @@
         <div class="sidebar__inner">
           <app-todo-profile-ui [user]="user$ | async"></app-todo-profile-ui>
           <app-todo-form-ui (createTodo)="onCreate($event)"></app-todo-form-ui>
-          <app-todo-tools-ui></app-todo-tools-ui>
+          <app-todo-tools-ui
+            (sortId)="onSortId()"
+            (sortCompleted)="onSortCompleted()"
+          ></app-todo-tools-ui>
           <app-todo-logout-ui (logout)="logoutUser()"></app-todo-logout-ui>
         </div>
       </aside>
@@ -14,6 +17,7 @@
           [todoList]="todoList$ | async"
           (deleteTodo)="onDeleteTodo($event)"
           (checkTodo)="onCheckTodo($event)"
+          (editTodo)="onEditTodo($event)"
         ></app-todo-list-ui>
       </main>
     </div>

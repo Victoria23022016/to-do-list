@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component, DestroyRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  OnInit,
+} from '@angular/core';
 import { TodoService } from '../services/todo.service';
-import { Store, select } from '@ngrx/store';
 import { Todo, User } from '../models/models';
-import { loginSelector } from '../store/auth/auth.selectors';
-import { Observable, finalize, tap } from 'rxjs';
-import { todoSelector } from '../store/todo/todo.selectors';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,7 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './todo-widget.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoWidgetComponent {
+export class TodoWidgetComponent implements OnInit {
   todoList$: Observable<Todo[]> = this._todoService.getTodoListFromStore();
   user$: Observable<User>;
 
@@ -27,11 +29,15 @@ export class TodoWidgetComponent {
 
   ngOnInit(): void {
     this.user$ = this._authService.getCurrentUserFromStorage();
-    this._authService.getCurrentUserFromStorage().subscribe((user) => {
-      this._todoService
-        .addTodoListToStore(user)
-        .subscribe(() => this._todoService.getTodoListFromStore());
-    });
+    this._authService
+      .getCurrentUserFromStorage()
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe((user) => {
+        this._todoService
+          .addTodoListToStore(user)
+          .pipe(takeUntilDestroyed(this._destroyRef))
+          .subscribe(() => this._todoService.getTodoListFromStore());
+      });
   }
 
   logoutUser(): void {
@@ -44,6 +50,7 @@ export class TodoWidgetComponent {
   onCreate(text: string): void {
     this._authService
       .getCurrentUserFromStorage()
+      .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((user) => this._todoService.addTodo(text, user));
   }
 
@@ -54,4 +61,14 @@ export class TodoWidgetComponent {
   onCheckTodo(id: number): void {
     this._todoService.checkTodo(id);
   }
+
+  onEditTodo(event: { id: number; text: string }): void {
+    this._todoService.editTodo(event.id, event.text);
+  }
+
+  onSortId(): void {
+    //this.todoList$ = this._todoService.getTodoListFromStore().pipe(sort())
+  }
+
+  onSortCompleted(): void {}
 }

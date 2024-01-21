@@ -42,8 +42,11 @@ export class AuthComponent implements OnInit {
 
   submit(): void {
     this.formData = { ...this.form.value };
-    this._authService.login(this.formData).subscribe(() => {
-      this.form.reset(), this._router.navigate(['/todo']);
-    });
+    this._authService
+      .login(this.formData)
+      .pipe(takeUntilDestroyed(this._destroyRef))
+      .subscribe(() => {
+        this.form.reset(), this._router.navigate(['/todo']);
+      });
   }
 }
