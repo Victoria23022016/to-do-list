@@ -1,11 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AUTH_REDUCER_NODE } from './auth.reducer';
-import { UserState } from '../../models/models';
+import { User } from 'src/app/models/models';
 
 export const authFeatureSelector =
-  createFeatureSelector<UserState>(AUTH_REDUCER_NODE);
+  createFeatureSelector<User>(AUTH_REDUCER_NODE);
 
 export const loginSelector = createSelector(
   authFeatureSelector,
-  (state) => state.user
+  (state) => state
 );

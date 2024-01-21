@@ -1,9 +1,9 @@
 import { DestroyRef, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthData, User } from '../models/models';
-import { Observable, tap } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { AuthCreateAction } from '../store/auth/auth.actions';
+import { AuthCreateAction, AuthDeleteAction } from '../store/auth/auth.actions';
 import { loginSelector } from '../store/auth/auth.selectors';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -42,7 +42,7 @@ export class AuthService {
     });
   }
 
-  getCurrentUser(): Observable<User> {
+  getCurrentUserFromStorage(): Observable<User> {
     return this._store$.pipe(select(loginSelector));
   }
 
@@ -56,6 +56,12 @@ export class AuthService {
       .pipe(select(loginSelector))
       .subscribe((responce) => (check = !!responce.id));
     return check;
+  }
+
+  deleteUser(): Observable<void> {
+    return of(this._store$.dispatch(new AuthDeleteAction())).pipe(
+      tap(() => window.localStorage.clear())
+    );
   }
 
   private _addTokenToLocalStorage(token: string): void {

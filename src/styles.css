@@ -4,8 +4,9 @@
 @import "./assets/styles/container.css";
 @import "./assets/styles/form.css";
 @import "./assets/styles/page.css";
-@import "./assets/styles/posts.css";
 @import "./assets/styles/sidebar.css";
+@import "./assets/styles/todos.css";
+@import "./assets/styles/todo-card.css";
 
 :root {
   font-size: 10px;

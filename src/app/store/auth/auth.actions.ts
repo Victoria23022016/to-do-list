@@ -11,9 +11,9 @@ export class AuthCreateAction implements Action {
   constructor(public payload: User) {}
 }
 
-export class AuthoDeleteAction implements Action {
+export class AuthDeleteAction implements Action {
   readonly type = AuthActionsType.delete;
-  constructor(public payload: User) {}
+  constructor() {}
 }
 
-export type AuthActions = AuthCreateAction;
+export type AuthActions = AuthCreateAction | AuthDeleteAction;

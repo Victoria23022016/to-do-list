@@ -1,1 +1,13 @@
-<app-todo-item-ui></app-todo-item-ui>
+<div class="todos__inner">
+  <h3 class="todos__title">Tasks</h3>
+  <div class="todos__wrapper">
+    @for(todo of todoList; track $index) {
+    <app-todo-item-ui
+      [todo]="todo"
+      class="todo-card"
+      (deleteTodo)="onDeleteTodo($event)"
+      (checkTodo)="onCheckTodo($event)"
+    ></app-todo-item-ui>
+    }
+  </div>
+</div>

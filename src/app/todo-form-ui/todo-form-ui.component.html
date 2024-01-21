@@ -1,10 +1,17 @@
-<form class="form form_profile">
+<form class="form form_profile" (ngSubmit)="onSubmit()" [formGroup]="form">
   <div class="form__control">
     <div class="form__input-wrapper_profile">
-      <input class="form__input form__text" type="text" />
+      <input
+        class="form__input form__text"
+        type="text"
+        formControlName="todo"
+      />
     </div>
 
-    <button class="button button_primary button__inner">
+    <button
+      class="button button_primary button__inner"
+      [disabled]="form.invalid"
+    >
       <svg
         class="button__icon"
         viewBox="0 0 24 24"
