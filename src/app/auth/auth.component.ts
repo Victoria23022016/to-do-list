@@ -2,14 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
-  ElementRef,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { AuthData, User } from '../models/models';
+import { AuthData } from '../models/models';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

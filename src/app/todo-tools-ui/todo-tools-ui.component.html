@@ -2,7 +2,13 @@
   <div class="sidebar__tools">
     <span class="sidebar__text">Mode:</span>
     <div class="sidebar__buttons-layout">
-      <button class="button button_secondary button__inner_small">
+      <button
+        class="button button_secondary button__inner_small"
+        (click)="onLocalStorageMode()"
+        [ngStyle]="{
+          background: localStorageMode ? 'var(--grey)' : 'var(--medium-green)'
+        }"
+      >
         <svg
           class="button__icon"
           viewBox="0 0 23 20"
@@ -14,7 +20,13 @@
           />
         </svg>
       </button>
-      <button class="button button_primary button__inner_small">
+      <button
+        class="button button_primary button__inner_small"
+        (click)="onServerMode()"
+        [ngStyle]="{
+          background: localStorageMode ? 'var(--medium-green)' : 'var(--grey)'
+        }"
+      >
         <svg
           class="button__icon"
           viewBox="0 0 23 16"

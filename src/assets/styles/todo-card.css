@@ -58,3 +58,15 @@
   left: 1.38rem;
   top: 1.2rem;
 }
+
+@media (max-width: 391px) {
+  .todo-card__body {
+    width: 28rem;
+  }
+  .todo-card__number {
+    font-size: 1.3rem;
+  }
+  .todo-card__text {
+    font-size: 1.3rem;
+  }
+}

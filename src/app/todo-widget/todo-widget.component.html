@@ -8,6 +8,7 @@
           <app-todo-tools-ui
             (sortId)="onSortId($event)"
             (sortCompleted)="onSortCompleted($event)"
+            (changeMode)="onChangeMode($event)"
           ></app-todo-tools-ui>
           <app-todo-logout-ui (logout)="logoutUser()"></app-todo-logout-ui>
         </div>

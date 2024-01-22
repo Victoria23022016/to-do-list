@@ -35,6 +35,7 @@
   font-weight: 600;
   line-height: 2.2rem;
   background-color: var(--orange);
+  margin-bottom: 1rem;
 }
 
 .button__inner {

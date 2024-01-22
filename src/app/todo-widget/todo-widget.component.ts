@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Todo, User } from '../models/models';
-import { Observable, map, tap, toArray } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -84,5 +84,9 @@ export class TodoWidgetComponent implements OnInit {
           )
         )
       : this._todoService.getTodoListFromStore();
+  }
+
+  onChangeMode(mode: boolean): void {
+    this._todoService.localStorageMode.next(mode);
   }
 }

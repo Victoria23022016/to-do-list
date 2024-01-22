@@ -33,3 +33,12 @@
   width: 37.6rem;
   gap: 2.2rem;
 }
+
+@media (max-width: 391px) {
+  .todos__inner {
+    margin-top: 0;
+  }
+  .todos__wrapper {
+    margin-top: 3rem;
+  }
+}
