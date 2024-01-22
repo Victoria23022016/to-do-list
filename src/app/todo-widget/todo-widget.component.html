@@ -6,8 +6,8 @@
           <app-todo-profile-ui [user]="user$ | async"></app-todo-profile-ui>
           <app-todo-form-ui (createTodo)="onCreate($event)"></app-todo-form-ui>
           <app-todo-tools-ui
-            (sortId)="onSortId()"
-            (sortCompleted)="onSortCompleted()"
+            (sortId)="onSortId($event)"
+            (sortCompleted)="onSortCompleted($event)"
           ></app-todo-tools-ui>
           <app-todo-logout-ui (logout)="logoutUser()"></app-todo-logout-ui>
         </div>

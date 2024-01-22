@@ -18,7 +18,7 @@ export class TodoGuard {
   }
 }
 
-export const CanActivateTodo: CanActivateChildFn = (
+export const CanActivateTodo: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ): boolean => {

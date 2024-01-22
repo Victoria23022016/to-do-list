@@ -26,7 +26,7 @@ export class TodoListUiComponent {
     this.checkTodo.emit(id);
   }
 
-  onEditTodo(event: { id: number; text: string }) {
+  onEditTodo(event: { id: number; text: string }): void {
     this.editTodo.emit(event);
   }
 }

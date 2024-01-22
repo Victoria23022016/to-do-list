@@ -28,7 +28,7 @@ export class TodoItemUiComponent {
     this.checkTodo.emit(id);
   }
 
-  onEdit(text: string, id: number) {
+  onEdit(text: string, id: number): void {
     this.editTodo.emit({ text, id });
     this.hiddenInput = true;
   }

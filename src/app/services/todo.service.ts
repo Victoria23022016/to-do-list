@@ -3,7 +3,7 @@ import { DestroyRef, Injectable, OnInit } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Todo, TodoData, User } from '../models/models';
 import { Store, select } from '@ngrx/store';
-import { Observable, map, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, map, tap } from 'rxjs';
 import {
   TodoCheckAction,
   TodoCreateAction,
@@ -44,7 +44,11 @@ export class TodoService implements OnInit {
   addTodoListToStore(user): Observable<Todo[]> {
     return this._http.get<TodoData>(`${this.userTodosURL}${user.id}`).pipe(
       map((responce) => responce.todos),
-      tap((responce) => this._store$.dispatch(new TodoLoadAction(responce)))
+      tap((responce) => this._store$.dispatch(new TodoLoadAction(responce))),
+      catchError((error) => {
+        console.log(error);
+        return EMPTY;
+      })
     );
   }
 
@@ -55,32 +59,58 @@ export class TodoService implements OnInit {
   addTodo(text: string, user: User) {
     const todo = this._makeTodo(text, user);
     this._store$.dispatch(new TodoCreateAction(todo));
-    this._http.post<Todo>(this.addURL, todo, {
-      headers: new HttpHeaders(this.headers),
-    });
+    this._http
+      .post<Todo>(this.addURL, todo, {
+        headers: new HttpHeaders(this.headers),
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      );
   }
 
   deleteTodo(id: number): void {
     this._store$.dispatch(new TodoDeleteAction(id));
-    this._http.delete(`${this.todosURL}${id}`);
+    this._http.delete(`${this.todosURL}${id}`).pipe(
+      catchError((error) => {
+        console.log(error);
+        return EMPTY;
+      })
+    );
   }
 
   checkTodo(id: number): void {
     this._store$.dispatch(new TodoCheckAction(id));
-    this._http.put(
-      `${this.todosURL}${id}`,
-      { completed: false },
-      { headers: new HttpHeaders(this.headers) }
-    );
+    this._http
+      .put(
+        `${this.todosURL}${id}`,
+        { completed: false },
+        { headers: new HttpHeaders(this.headers) }
+      )
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      );
   }
 
   editTodo(id: number, text: string): void {
     this._store$.dispatch(new TodoEditAction({ id, text }));
-    this._http.put(
-      `${this.todosURL}${id}`,
-      { todo: text },
-      { headers: new HttpHeaders(this.headers) }
-    );
+    this._http
+      .put(
+        `${this.todosURL}${id}`,
+        { todo: text },
+        { headers: new HttpHeaders(this.headers) }
+      )
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      );
   }
 
   private _makeTodo(text: string, user: User): Todo {
