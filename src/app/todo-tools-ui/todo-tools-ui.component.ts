@@ -14,11 +14,16 @@ export class TodoToolsUiComponent {
   @Output() sortId = new EventEmitter();
   @Output() sortCompleted = new EventEmitter();
 
+  sortedListById = false;
+  sortedListByCompleted = false;
+
   onSortId(): void {
-    this.sortId.emit();
+    this.sortedListById = !this.sortedListById;
+    this.sortId.emit(this.sortedListById);
   }
 
   onSortCompleted(): void {
-    this.sortCompleted.emit();
+    this.sortedListByCompleted = !this.sortedListByCompleted;
+    this.sortCompleted.emit(this.sortedListByCompleted);
   }
 }

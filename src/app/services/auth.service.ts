@@ -1,7 +1,7 @@
 import { DestroyRef, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthData, User } from '../models/models';
-import { Observable, of, tap } from 'rxjs';
+import { EMPTY, Observable, catchError, of, tap } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { AuthCreateAction, AuthDeleteAction } from '../store/auth/auth.actions';
 import { loginSelector } from '../store/auth/auth.selectors';
@@ -37,9 +37,16 @@ export class AuthService {
   }
 
   getUserFromServer(formData: AuthData): Observable<User> {
-    return this._http.post<User>(this.loginURL, formData, {
-      headers: new HttpHeaders(this.loginHeaders),
-    });
+    return this._http
+      .post<User>(this.loginURL, formData, {
+        headers: new HttpHeaders(this.loginHeaders),
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      );
   }
 
   getCurrentUserFromStorage(): Observable<User> {
@@ -71,8 +78,15 @@ export class AuthService {
 
   private _getUserDataByToken(): Observable<User> {
     const bearerToken = window.localStorage['bearerToken'];
-    return this._http.get<User>(this.currentUserURL, {
-      headers: new HttpHeaders({ Authorization: `Bearer ${bearerToken}` }),
-    });
+    return this._http
+      .get<User>(this.currentUserURL, {
+        headers: new HttpHeaders({ Authorization: `Bearer ${bearerToken}` }),
+      })
+      .pipe(
+        catchError((error) => {
+          console.log(error);
+          return EMPTY;
+        })
+      );
   }
 }

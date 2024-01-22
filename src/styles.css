@@ -1,5 +1,5 @@
 @import "./assets/styles/normalize.css";
-@import "./assets/styles/fonts.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Ubuntu:ital@1&display=swap");
 @import "./assets/styles/button.css";
 @import "./assets/styles/container.css";
 @import "./assets/styles/form.css";

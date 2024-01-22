@@ -2,10 +2,7 @@
   <div class="sidebar__tools">
     <span class="sidebar__text">Mode:</span>
     <div class="sidebar__buttons-layout">
-      <button
-        class="button button_secondary button__inner_small"
-        (click)="onSortId()"
-      >
+      <button class="button button_secondary button__inner_small">
         <svg
           class="button__icon"
           viewBox="0 0 23 20"
@@ -36,7 +33,10 @@
     <div class="sidebar__buttons-layout">
       <button
         class="button button_primary button__inner_small"
-        (click)="onSortCompleted()"
+        (click)="onSortId()"
+        [ngStyle]="{
+          background: sortedListById ? 'var(--grey)' : 'var(--medium-green)'
+        }"
       >
         <svg
           class="button__icon"
@@ -49,7 +49,15 @@
           />
         </svg>
       </button>
-      <button class="button button_primary button__inner_small">
+      <button
+        class="button button_primary button__inner_small"
+        (click)="onSortCompleted()"
+        [ngStyle]="{
+          background: sortedListByCompleted
+            ? 'var(--grey)'
+            : 'var(--medium-green)'
+        }"
+      >
         <svg
           class="button__icon"
           viewBox="0 0 25 23"
