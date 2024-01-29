@@ -1,4 +1,4 @@
-import { Todo } from 'src/app/models/models';
+import { Todo } from '../../models/models';
 import { TodoActions, TodoActionsType } from './todo.actions';
 
 export const TODO_REDUCER_NODE = 'TODO_REDUCER_NODE';
