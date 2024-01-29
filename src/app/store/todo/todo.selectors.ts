@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Todo } from 'src/app/models/models';
+import { Todo } from '../../models/models';
 import { TODO_REDUCER_NODE } from './todo.reducer';
 
 export const todoFeatureSelector =
